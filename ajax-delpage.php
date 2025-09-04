@@ -50,14 +50,11 @@
                 <th>id</th>
                 <th>name</th>
                 <th>email</th>
+                <th>action</th>
             </tr>
         </thead>
         <tbody id="body">
-            <tr>
-                <td>1</td>
-                <td>adeel</td>
-                <td>adeelbhatti123@gmail.com</td>
-            </tr>
+            
         </tbody>
     </table>
 
@@ -78,6 +75,9 @@ $(document).ready(function(){
         e.preventDefault();
         var Name = $("#name").val();
         var Email = $("#email").val();
+        if( Name=="" || Email==""){
+            alert('Please Enter your Name or Email!');
+        }else{
         $.ajax({
             url : "insert.php",
             type : "post", 
@@ -90,8 +90,27 @@ $(document).ready(function(){
                     alert("user can't save!");
                 }
             }
-        })
+        });
+    }
+    });
 
+    $(document).on('click',".del-btn", function(){
+      var id = $(this).data("id");
+      var element = $(this).data("name");
+     $.ajax({
+            url : "del.php",
+            type : "post", 
+            data : {idd : id},
+            success  : function(data){
+                if( data == 1){
+
+                    alert("User "+ element +" record delete!");
+                    loadtable();
+                }else{
+                    alert("user can't delete!");
+                }
+            }
+        });
     });
 });
 </script>

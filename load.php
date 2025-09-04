@@ -1,7 +1,7 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "ajax") or die("Connection failed");
 
-$sql = "SELECT * FROM users ORDER BY id DESC";
+$sql = "SELECT * FROM users ";
 $result = mysqli_query($conn, $sql) or die("Query Failed.");
 
 $output = "";
@@ -12,6 +12,7 @@ if(mysqli_num_rows($result) > 0){
                         <td>{$row['id']}</td>
                         <td>{$row['name']}</td>
                         <td>{$row['email']}</td>
+                        <td> <input type='button' class='del-btn' style='color: red;  border: 1px solid red' data-id='{$row['id']}' data-name='{$row['name']}' value='Delete'> </td>
                     </tr>";
     }
     echo $output;
